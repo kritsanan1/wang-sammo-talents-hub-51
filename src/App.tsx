@@ -12,6 +12,8 @@ import { Loader2 } from 'lucide-react';
 const Index = lazy(() => import("./pages/Index" /* webpackChunkName: "index-page" */));
 const JobsPage = lazy(() => import("./pages/JobsPage" /* webpackChunkName: "jobs-page" */));
 const JobDetailPage = lazy(() => import("./pages/JobDetailPage" /* webpackChunkName: "job-detail-page" */));
+const CompanyPage = lazy(() => import("./pages/CompanyPage" /* webpackChunkName: "company-page" */));
+const ApplicationTrackingPage = lazy(() => import("./pages/ApplicationTrackingPage" /* webpackChunkName: "application-tracking-page" */));
 const NotFound = lazy(() => import("./pages/NotFound" /* webpackChunkName: "not-found-page" */));
 
 // Improved loading component with better visual feedback
@@ -44,6 +46,8 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/jobs" element={<JobsPage />} />
               <Route path="/job/:id" element={<JobDetailPage />} />
+              <Route path="/company/:companySlug" element={<CompanyPage />} />
+              <Route path="/applications" element={<ApplicationTrackingPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

@@ -10,9 +10,10 @@ import { MapPin, Building, Calendar } from 'lucide-react';
 
 interface JobCardProps {
   job: Job;
+  compact?: boolean;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ job }) => {
+const JobCard: React.FC<JobCardProps> = ({ job, compact = false }) => {
   const { t, language } = useLanguage();
   
   const jobTitle = language === 'th' ? (job.titleThai || job.title) : job.title;

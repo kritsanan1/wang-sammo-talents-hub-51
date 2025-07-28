@@ -14,6 +14,12 @@ export interface Job {
   datePosted: string;
   isHot?: boolean;
   categories: string[];
+  // Enhanced fields
+  workType?: string;
+  experience?: string;
+  education?: string;
+  skills?: string[];
+  benefits?: string[];
 }
 
 export const jobs: Job[] = [
