@@ -10,14 +10,18 @@ interface RelatedJobsProps {
 }
 
 const RelatedJobs: React.FC<RelatedJobsProps> = ({ currentJobId, categories, company }) => {
-  // Find related jobs based on categories or company
+  // Find related jobs based on categories or company, excluding current job
   const relatedJobs = jobs
-    .filter(job => job.id !== currentJobId)
-    .filter(job => 
-      job.company === company || 
-      job.categories.some(cat => categories.includes(cat))
-    )
-    .slice(0, 4); // Show only 4 related jobs
+    .filter(job => {
+      if (job.id === currentJobId) return false;
+      
+      // Prioritize jobs from same company
+      if (job.company === company) return true;
+      
+      // Then jobs with similar categories
+      return job.categories.some(category => categories.includes(category));
+    })
+    .slice(0, 3); // Limit to 3 related jobs
 
   if (relatedJobs.length === 0) {
     return null;
@@ -26,12 +30,12 @@ const RelatedJobs: React.FC<RelatedJobsProps> = ({ currentJobId, categories, com
   return (
     <Card className="mt-8">
       <CardHeader>
-        <CardTitle className="font-prompt text-lg">งานที่เกี่ยวข้อง</CardTitle>
+        <CardTitle className="font-prompt text-xl">งานที่คุณอาจสนใจ</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {relatedJobs.map(job => (
-            <JobCard key={job.id} job={job} compact />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {relatedJobs.map((job) => (
+            <JobCard key={job.id} job={job} />
           ))}
         </div>
       </CardContent>

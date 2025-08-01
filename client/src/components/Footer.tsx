@@ -1,120 +1,100 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { Link } from 'wouter';
+import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
-  const { t } = useLanguage();
-  
   return (
-    <footer className="bg-gray-50 border-t">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="bg-gray-900 text-white">
+      <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-1">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
-              <img 
-                src="/lovable-uploads/dbc20659-751f-4e70-9ce3-49e4dc99bc25.png" 
-                alt="ที่นี่ วังสามหมอ" 
-                className="h-10" 
-              />
-              <div className="flex flex-col">
-                <span className="text-lg font-prompt font-bold text-wang-blue">ที่นี่ วังสามหมอ</span>
-                <span className="text-xs text-gray-500">TOUR DER WANG</span>
+          {/* Company Info */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <div className="bg-wang-blue text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold">
+                W
               </div>
-            </Link>
-            <p className="text-gray-600 mt-2">
-              แหล่งรวมตำแหน่งงานในพื้นที่วังสามหมอและบริเวณใกล้เคียง เชื่อมต่อคนหางานกับนายจ้างในภาคการท่องเที่ยวและบริการ
+              <span className="font-prompt text-xl font-bold">
+                วังสามหมอ Jobs
+              </span>
+            </div>
+            <p className="text-gray-300 text-sm">
+              แหล่งรวมตำแหน่งงานในท้องถิ่นสำหรับผู้ที่ต้องการทำงานในภาคการท่องเที่ยวและการบริการ
             </p>
+            <div className="flex space-x-4">
+              <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
+              <Twitter className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
+              <Instagram className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
+            </div>
           </div>
 
-          <div className="col-span-1">
-            <h3 className="font-prompt font-medium text-lg mb-4">{t('forJobSeekers')}</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/jobs" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('searchJobs')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/profile" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('myProfile')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/saved-jobs" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('savedJobs')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/job-alerts" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('jobAlerts')}
-                </Link>
-              </li>
-            </ul>
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h3 className="font-prompt font-semibold">ลิงก์ด่วน</h3>
+            <div className="space-y-2">
+              <Link to="/" className="text-gray-300 hover:text-white text-sm block">
+                หน้าแรก
+              </Link>
+              <Link to="/jobs" className="text-gray-300 hover:text-white text-sm block">
+                ค้นหางาน
+              </Link>
+              <Link to="/applications" className="text-gray-300 hover:text-white text-sm block">
+                ติดตามใบสมัคร
+              </Link>
+            </div>
           </div>
 
-          <div className="col-span-1">
-            <h3 className="font-prompt font-medium text-lg mb-4">{t('forEmployers')}</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/post-job" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('postJobs')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/pricing" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('pricingPackages')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/company-profile" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('companyProfile')}
-                </Link>
-              </li>
-            </ul>
+          {/* Categories */}
+          <div className="space-y-4">
+            <h3 className="font-prompt font-semibold">หมวดหมู่งาน</h3>
+            <div className="space-y-2">
+              <Link to="/jobs?category=Tourism" className="text-gray-300 hover:text-white text-sm block">
+                ท่องเที่ยว
+              </Link>
+              <Link to="/jobs?category=Hospitality" className="text-gray-300 hover:text-white text-sm block">
+                การโรงแรม
+              </Link>
+              <Link to="/jobs?category=Food" className="text-gray-300 hover:text-white text-sm block">
+                อาหารและเครื่องดื่ม
+              </Link>
+              <Link to="/jobs?category=Technology" className="text-gray-300 hover:text-white text-sm block">
+                เทคโนโลยี
+              </Link>
+            </div>
           </div>
 
-          <div className="col-span-1">
-            <h3 className="font-prompt font-medium text-lg mb-4">{t('about')}</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/about" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('about')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('contactUs')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('privacyPolicy')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="text-gray-600 hover:text-wang-orange transition-colors">
-                  {t('termsOfUse')}
-                </Link>
-              </li>
-            </ul>
+          {/* Contact Info */}
+          <div className="space-y-4">
+            <h3 className="font-prompt font-semibold">ติดต่อเรา</h3>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2 text-gray-300 text-sm">
+                <MapPin className="h-4 w-4" />
+                <span>วังสามหมอ อุทัยธานี</span>
+              </div>
+              <div className="flex items-center space-x-2 text-gray-300 text-sm">
+                <Phone className="h-4 w-4" />
+                <span>02-XXX-XXXX</span>
+              </div>
+              <div className="flex items-center space-x-2 text-gray-300 text-sm">
+                <Mail className="h-4 w-4" />
+                <span>info@wangsammo-jobs.com</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="border-t mt-8 pt-8 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} ที่นี่ วังสามหมอ. สงวนลิขสิทธิ์.
-          </p>
-          <div className="flex space-x-6">
-            <a href="#" className="text-gray-500 hover:text-wang-orange transition-colors">
-              Facebook
-            </a>
-            <a href="#" className="text-gray-500 hover:text-wang-orange transition-colors">
-              Instagram
-            </a>
-            <a href="#" className="text-gray-500 hover:text-wang-orange transition-colors">
-              LINE
-            </a>
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © 2024 วังสามหมอ Jobs. สงวนลิขสิทธิ์ทั้งหมด.
+            </p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <a href="#" className="text-gray-400 hover:text-white text-sm">
+                นโยบายความเป็นส่วนตัว
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white text-sm">
+                เงื่อนไขการใช้งาน
+              </a>
+            </div>
           </div>
         </div>
       </div>

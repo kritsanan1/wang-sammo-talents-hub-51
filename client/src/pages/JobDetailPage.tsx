@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import Header from '@/components/Header';
@@ -13,7 +13,7 @@ import { jobs } from '@/data/jobs';
 
 const JobDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   
   // Find job by ID with enhanced data
   const job = jobs.find(job => job.id === id);
@@ -26,7 +26,7 @@ const JobDetailPage = () => {
           <div className="text-center p-8">
             <h1 className="font-prompt text-xl sm:text-2xl font-semibold mb-4">ไม่พบประกาศงาน</h1>
             <p className="text-muted-foreground mb-6">อาจถูกลบหรือเปลี่ยนแปลงแล้ว</p>
-            <Button onClick={() => navigate(-1)}>กลับไปยังหน้าก่อนหน้า</Button>
+            <Button onClick={() => window.history.back()}>กลับไปยังหน้าก่อนหน้า</Button>
           </div>
         </div>
         <Footer />

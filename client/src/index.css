@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
 
-/* Fonts are loaded via index.html for better performance */
+/* Fonts are loaded via CDN for better performance */
 
 @tailwind base;
 @tailwind components;
@@ -7,117 +8,62 @@
 
 @layer base {
   :root {
-    /* Enhanced background system with gradients */
     --background: 0 0% 100%;
-    --background-secondary: 210 40% 98%;
-    --background-accent: 220 14% 96%;
-    --foreground: 220 8.9% 46.1%;
-    --foreground-heading: 220 9% 16%;
-
-    /* Enhanced card system */
+    --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
-    --card-foreground: 220 8.9% 46.1%;
-    --card-border: 220 13% 91%;
-    --card-shadow: 220 13% 69% / 0.15;
-
-    /* Popover system */
+    --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 8.9% 46.1%;
-
-    /* Enhanced primary colors matching Wang Sam Mo brand */
-    --primary: 221 83% 53%; /* Enhanced blue from #1E40AF */
-    --primary-light: 221 83% 70%;
-    --primary-dark: 221 83% 40%;
-    --primary-foreground: 0 0% 98%;
-
-    /* Secondary system */
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    /* Muted colors */
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 8.9% 46.1%;
-
-    /* Wang brand accent (warm orange) */
-    --accent: 33 100% 50%; /* #F59E0B */
-    --accent-light: 33 100% 65%;
-    --accent-dark: 33 100% 40%;
-    --accent-foreground: 0 0% 98%;
-
-    /* Enhanced status colors */
-    --success: 142 71% 45%;
-    --success-foreground: 0 0% 98%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 98%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
 
-    /* Enhanced borders and inputs */
-    --border: 220 13% 91%;
-    --border-light: 220 13% 95%;
-    --input: 220 13% 91%;
-    --ring: 221 83% 53%;
-
-    /* Enhanced gradients for Thai cultural design */
-    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(221 83% 70%));
-    --gradient-secondary: linear-gradient(135deg, hsl(33 100% 50%), hsl(38 92% 50%));
-    --gradient-hero: linear-gradient(135deg, hsl(221 83% 40%) 0%, hsl(221 83% 53%) 50%, hsl(221 83% 70%) 100%);
-    --gradient-subtle: linear-gradient(135deg, hsl(220 14% 96%) 0%, hsl(0 0% 100%) 100%);
-    
-    /* Thai cultural shadow system */
-    --shadow-elegant: 0 4px 20px -2px hsl(221 83% 53% / 0.15);
-    --shadow-card: 0 2px 10px -2px hsl(220 13% 69% / 0.15);
-    --shadow-float: 0 8px 30px -4px hsl(221 83% 53% / 0.25);
-
-    /* Radius system */
-    --radius: 0.75rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Custom Wang Sam Mo Theme Colors */
+    --wang-blue: 220 91% 42%;
+    --wang-orange: 25 95% 53%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --ring: 224.3 76.3% 94.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
@@ -125,118 +71,75 @@
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground font-sarabun;
-    overflow-x: hidden;
-    width: 100%;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-prompt;
+    @apply bg-background text-foreground;
+    font-family: 'Prompt', 'Inter', system-ui, sans-serif;
   }
 }
 
-@layer components {
-  /* Enhanced job card with micro-interactions */
-  .job-card {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-    box-shadow: var(--shadow-card);
+@layer utilities {
+  .font-prompt {
+    font-family: 'Prompt', sans-serif;
   }
   
-  .job-card:hover {
-    box-shadow: var(--shadow-float);
+  .text-wang-blue {
+    color: hsl(var(--wang-blue));
   }
   
-  /* Enhanced Thai cultural pattern */
-  .thai-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F97316' fill-opacity='0.08'%3E%3Cpath d='M20 20h8v8h-8zm32 0h8v8h-8zm-32 32h8v8h-8zm32 0h8v8h-8zM0 0h8v8H0zm72 0h8v8h-8zM0 72h8v8H0zm72 0h8v8h-8zm-32-32h8v8h-8z'/%3E%3Cpath d='M40 20v-8h8v8zm0 40v-8h8v8zm-20-20h-8v8h8zm40 0h-8v8h8z' fill='%23F97316' fill-opacity='0.04'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  .bg-wang-blue {
+    background-color: hsl(var(--wang-blue));
   }
   
-  /* Enhanced gradients using design system */
+  .text-wang-orange {
+    color: hsl(var(--wang-orange));
+  }
+  
+  .bg-wang-orange {
+    background-color: hsl(var(--wang-orange));
+  }
+  
   .banner-gradient {
-    background: var(--gradient-hero);
+    background: linear-gradient(135deg, hsl(var(--wang-blue)) 0%, hsl(var(--wang-orange)) 100%);
   }
   
-  .card-gradient {
-    background: var(--gradient-subtle);
+  .thai-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20s20 8.954 20 20 8.954 20 20 20-8.954-20-20-20zM0 20c0-11.046 8.954-20 20-20s20 8.954 20 20-8.954 20-20 20S0 31.046 0 20z'/%3E%3C/g%3E%3C/svg%3E");
   }
-  
-  /* Interactive elements */
-  .interactive-scale {
-    @apply transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98];
-  }
-  
-  .floating-action {
-    @apply transition-all duration-300 hover:shadow-lg;
-    box-shadow: var(--shadow-elegant);
-  }
-  
-  .floating-action:hover {
-    box-shadow: var(--shadow-float);
-    transform: translateY(-2px);
-  }
-  
-  /* Thai cultural decorative elements */
-  .thai-accent::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-secondary);
-  }
-  
-  /* Status indicators */
-  .status-hot {
-    @apply relative;
-    background: var(--gradient-secondary);
-  }
-  
-  .status-hot::before {
-    content: '🔥';
-    position: absolute;
-    left: -8px;
-    top: 50%;
-    transform: translateY(-50%);
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
-/* Optimized Loading States */
-.content-loading {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: .5;
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground));
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Responsive Typography */
-@media (max-width: 640px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-/* Focus Visible Styles */
-:focus-visible {
-  @apply outline-wang-orange outline-offset-2;
-}
-
-/* Improved form controls on mobile */
-@media (max-width: 640px) {
-  input, 
-  select, 
-  textarea {
-    font-size: 16px !important; /* Prevents iOS zoom on focus */
-  }
+.animate-spin {
+  animation: spin 1s linear infinite;
 }

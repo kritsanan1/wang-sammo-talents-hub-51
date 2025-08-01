@@ -1,4 +1,3 @@
-
 export interface Job {
   id: string;
   title: string;
@@ -6,15 +5,13 @@ export interface Job {
   company: string;
   companyLogo?: string;
   location: string;
-  salary: string;
-  employmentType: 'Full-time' | 'Part-time' | 'Contract' | 'Internship';
-  description: string;
-  descriptionThai?: string;
-  requirements: string[];
   datePosted: string;
-  isHot?: boolean;
+  employmentType: string;
   categories: string[];
-  // Enhanced fields
+  salary?: string;
+  description: string;
+  requirements: string[];
+  isHot?: boolean;
   workType?: string;
   experience?: string;
   education?: string;
@@ -25,139 +22,146 @@ export interface Job {
 export const jobs: Job[] = [
   {
     id: "1",
-    title: "Tour Guide",
-    titleThai: "มัคคุเทศก์",
-    company: "Wang Sam Mo Tourism",
-    companyLogo: "/lovable-uploads/dbc20659-751f-4e70-9ce3-49e4dc99bc25.png",
-    location: "Wang Sam Mo, Udon Thani",
-    salary: "฿18,000 - ฿25,000 per month",
+    title: "Frontend Developer",
+    titleThai: "นักพัฒนาเว็บไซต์",
+    company: "Tech Solutions Co.",
+    companyLogo: "https://via.placeholder.com/150x150?text=Tech",
+    location: "วังสามหมอ",
+    datePosted: "2024-01-15",
     employmentType: "Full-time",
-    description: "Looking for an enthusiastic tour guide who has excellent knowledge of Wang Sam Mo's history, culture, and attractions. Must be fluent in Thai and English.",
-    descriptionThai: "กำลังมองหามัคคุเทศก์ที่มีความกระตือรือร้นซึ่งมีความรู้ที่ดีเกี่ยวกับประวัติศาสตร์ วัฒนธรรม และสถานที่ท่องเที่ยวของวังสามหมอ ต้องพูดภาษาไทยและภาษาอังกฤษได้คล่อง",
+    categories: ["Technology", "Development"],
+    salary: "30,000 - 45,000 บาท",
+    description: "พัฒนาและดูแลเว็บไซต์ด้านหน้าสำหรับธุรกิจท่องเที่ยว",
     requirements: [
-      "2+ years experience as a tour guide",
-      "Fluent in Thai and English",
-      "Knowledge of local history and culture",
-      "Strong communication skills",
-      "First aid certification is a plus"
+      "ปริญญาตรี สาขาวิทยาการคอมพิวเตอร์หรือที่เกี่ยวข้อง",
+      "มีประสบการณ์ React และ TypeScript",
+      "เข้าใจ Responsive Design"
     ],
-    datePosted: "2025-05-01",
     isHot: true,
-    categories: ["Tourism", "Hospitality"]
+    workType: "On-site",
+    experience: "1-3 ปี",
+    education: "ปริญญาตรี",
+    skills: ["React", "TypeScript", "CSS", "JavaScript"],
+    benefits: ["ประกันสุขภาพ", "โบนัสประจำปี", "วันหยุดพักผ่อน"]
   },
   {
     id: "2",
-    title: "Hotel Receptionist",
-    titleThai: "พนักงานต้อนรับโรงแรม",
-    company: "Sam Mo Resort",
-    location: "Wang Sam Mo, Udon Thani",
-    salary: "฿15,000 - ฿20,000 per month",
+    title: "Tour Guide",
+    titleThai: "ไกด์นำเที่ยว",
+    company: "Wang Sam Mo Tourism",
+    companyLogo: "https://via.placeholder.com/150x150?text=Tourism",
+    location: "วังสามหมอ",
+    datePosted: "2024-01-14",
     employmentType: "Full-time",
-    description: "We are seeking a professional and friendly receptionist for our resort. The ideal candidate will have excellent customer service skills and be able to handle guest inquiries, bookings, and check-ins/check-outs efficiently.",
-    descriptionThai: "เรากำลังมองหาพนักงานต้อนรับที่มีความเป็นมืออาชีพและเป็นมิตรสำหรับรีสอร์ทของเรา ผู้สมัครที่เหมาะสมจะมีทักษะการบริการลูกค้าที่ยอดเยี่ยมและสามารถจัดการกับข้อสงสัยของแขก การจอง และการเช็คอิน/เช็คเอาต์ได้อย่างมีประสิทธิภาพ",
+    categories: ["Tourism", "Service"],
+    salary: "18,000 - 25,000 บาท",
+    description: "นำเที่ยวและให้ข้อมูลแก่นักท่องเที่ยวที่เข้าชมวังสามหมอ",
     requirements: [
-      "Previous experience in hospitality",
-      "Excellent customer service skills",
-      "Basic computer proficiency",
-      "Available to work shifts including weekends and holidays"
+      "จบการศึกษาระดับมัธยมศึกษาตอนปลายขึ้นไป",
+      "มีใบอนุญาตไกด์นำเที่ยว",
+      "สามารถสื่อสารภาษาอังกฤษได้"
     ],
-    datePosted: "2025-05-02",
-    categories: ["Hospitality", "Customer Service"]
+    isHot: true,
+    workType: "On-site",
+    experience: "0-2 ปี",
+    education: "มัธยมศึกษาตอนปลาย",
+    skills: ["ภาษาอังกฤษ", "การสื่อสาร", "ความรู้ประวัติศาสตร์"],
+    benefits: ["ค่าคอมมิชชั่น", "การฝึกอบรม", "อุปกรณ์การทำงาน"]
   },
   {
     id: "3",
-    title: "Restaurant Chef",
-    titleThai: "เชฟร้านอาหาร",
-    company: "Wang Traditional Cuisine",
-    location: "Wang Sam Mo, Udon Thani",
-    salary: "฿25,000 - ฿35,000 per month",
+    title: "Hotel Receptionist",
+    titleThai: "พนักงานต้อนรับโรงแรม",
+    company: "Royal Heritage Hotel",
+    companyLogo: "https://via.placeholder.com/150x150?text=Hotel",
+    location: "วังสามหมอ",
+    datePosted: "2024-01-13",
     employmentType: "Full-time",
-    description: "Hiring a talented chef specialized in traditional Thai cuisine, particularly dishes from the Isan region. The chef will be responsible for menu planning, food preparation, and kitchen management.",
-    descriptionThai: "กำลังรับสมัครเชฟที่มีความสามารถเฉพาะทางด้านอาหารไทยดั้งเดิม โดยเฉพาะอาหารจากภาคอีสาน เชฟจะรับผิดชอบการวางแผนเมนู การเตรียมอาหาร และการจัดการครัว",
+    categories: ["Hospitality", "Service"],
+    salary: "20,000 - 28,000 บาท",
+    description: "ให้บริการต้อนรับและดูแลแขกในโรงแรม",
     requirements: [
-      "5+ years experience as a chef",
-      "Specialization in Thai cuisine, particularly Isan dishes",
-      "Kitchen management experience",
-      "Food hygiene certification"
+      "ปริญญาตรี สาขาการโรงแรม หรือที่เกี่ยวข้อง",
+      "มีประสบการณ์ในธุรกิจโรงแรม",
+      "สามารถสื่อสารภาษาอังกฤษได้ดี"
     ],
-    datePosted: "2025-05-03",
-    isHot: true,
-    categories: ["Food & Beverage", "Hospitality"]
+    isHot: false,
+    workType: "On-site",
+    experience: "1-2 ปี",
+    education: "ปริญญาตรี",
+    skills: ["Customer Service", "ภาษาอังกฤษ", "Computer Skills"],
+    benefits: ["ประกันสุขภาพ", "ชุดยูนิฟอร์ม", "อาหารฟรี"]
   },
   {
     id: "4",
-    title: "Cultural Heritage Officer",
-    titleThai: "เจ้าหน้าที่มรดกทางวัฒนธรรม",
-    company: "Wang Sam Mo Cultural Center",
-    location: "Wang Sam Mo, Udon Thani",
-    salary: "฿22,000 - ฿28,000 per month",
-    employmentType: "Full-time",
-    description: "Join our team as a Cultural Heritage Officer responsible for preserving and promoting the rich cultural heritage of Wang Sam Mo. The role includes conducting research, organizing cultural events, and developing educational programs.",
-    descriptionThai: "เข้าร่วมทีมของเราในฐานะเจ้าหน้าที่มรดกทางวัฒนธรรมที่รับผิดชอบการอนุรักษ์และส่งเสริมมรดกทางวัฒนธรรมอันอุดมสมบูรณ์ของวังสามหมอ บทบาทนี้รวมถึงการทำวิจัย การจัดงานทางวัฒนธรรม และการพัฒนาโปรแกรมการศึกษา",
+    title: "Restaurant Server",
+    titleThai: "พนักงานเสิร์ฟอาหาร",
+    company: "Thai Heritage Restaurant",
+    companyLogo: "https://via.placeholder.com/150x150?text=Restaurant",
+    location: "วังสามหมอ",
+    datePosted: "2024-01-12",
+    employmentType: "Part-time",
+    categories: ["Food", "Service"],
+    salary: "300 - 400 บาท/วัน",
+    description: "เสิร์ฟอาหารและเครื่องดื่มให้แก่ลูกค้า",
     requirements: [
-      "Degree in Cultural Studies, Anthropology, or related field",
-      "Knowledge of Thai cultural heritage",
-      "Strong organizational and event planning skills",
-      "Excellent communication and presentation abilities"
+      "การศึกษาระดับมัธยมศึกษาตอนปลายขึ้นไป",
+      "มีประสบการณ์ในร้านอาหาร",
+      "บุคลิกดี มีมนุษยสัมพันธ์ที่ดี"
     ],
-    datePosted: "2025-05-01",
-    categories: ["Education", "Culture"]
+    isHot: false,
+    workType: "On-site",
+    experience: "0-1 ปี",
+    education: "มัธยมศึกษาตอนปลาย",
+    skills: ["Customer Service", "การจำรายการอาหาร", "ความรวดเร็ว"],
+    benefits: ["Tips", "อาหารฟรี", "เวลาทำงานยืดหยุ่น"]
   },
   {
     id: "5",
-    title: "Marketing Coordinator",
-    titleThai: "ผู้ประสานงานการตลาด",
-    company: "Wang Sam Mo Tourism Board",
-    location: "Wang Sam Mo, Udon Thani",
-    salary: "฿20,000 - ฿28,000 per month",
+    title: "Museum Curator",
+    titleThai: "ผู้ดูแลพิพิธภัณฑ์",
+    company: "Wang Sam Mo Museum",
+    companyLogo: "https://via.placeholder.com/150x150?text=Museum",
+    location: "วังสามหมอ",
+    datePosted: "2024-01-11",
     employmentType: "Full-time",
-    description: "We are looking for a Marketing Coordinator to help promote Wang Sam Mo as a premier tourist destination. Responsibilities include developing marketing campaigns, managing social media accounts, and coordinating with local businesses.",
-    descriptionThai: "เรากำลังมองหาผู้ประสานงานการตลาดเพื่อช่วยส่งเสริมวังสามหมอให้เป็นจุดหมายปลายทางท่องเที่ยวชั้นนำ ความรับผิดชอบรวมถึงการพัฒนาแคมเปญการตลาด การจัดการบัญชีสื่อสังคม และการประสานงานกับธุรกิจท้องถิ่น",
+    categories: ["Culture", "Education"],
+    salary: "25,000 - 35,000 บาท",
+    description: "ดูแลและจัดการคอลเลกชันในพิพิธภัณฑ์",
     requirements: [
-      "Bachelor's degree in Marketing or related field",
-      "Experience in tourism marketing preferred",
-      "Strong digital marketing skills",
-      "Creative thinking and excellent communication abilities"
+      "ปริญญาโท สาขาประวัติศาสตร์ หรือศิลปกรรม",
+      "มีประสบการณ์ในพิพิธภัณฑ์",
+      "ความรู้เกี่ยวกับประวัติศาสตร์ไทย"
     ],
-    datePosted: "2025-04-28",
-    categories: ["Marketing", "Tourism"]
+    isHot: true,
+    workType: "On-site",
+    experience: "3-5 ปี",
+    education: "ปริญญาโท",
+    skills: ["Research", "Documentation", "Public Speaking"],
+    benefits: ["ประกันสุขภาพ", "การฝึกอบรม", "ทุนการศึกษา"]
   },
   {
     id: "6",
-    title: "Adventure Tour Operator",
-    titleThai: "ผู้ดำเนินการทัวร์ผจญภัย",
-    company: "Wang Adventure Co.",
-    location: "Wang Sam Mo, Udon Thani",
-    salary: "฿18,000 - ฿25,000 per month",
+    title: "Digital Marketing Specialist",
+    titleThai: "นักการตลาดดิจิทัล",
+    company: "Tourism Promotion Board",
+    companyLogo: "https://via.placeholder.com/150x150?text=Marketing",
+    location: "วังสามหมอ",
+    datePosted: "2024-01-10",
     employmentType: "Full-time",
-    description: "Join our team as an Adventure Tour Operator to lead exciting outdoor activities including hiking, kayaking, and wildlife tours around Wang Sam Mo. The ideal candidate has outdoor experience and a passion for adventure.",
-    descriptionThai: "เข้าร่วมทีมของเราในฐานะผู้ดำเนินการทัวร์ผจญภัยเพื่อนำกิจกรรมกลางแจ้งที่น่าตื่นเต้น รวมถึงการเดินป่า การพายเรือคายัค และทัวร์ชมสัตว์ป่ารอบวังสามหมอ ผู้สมัครที่เหมาะสมมีประสบการณ์กลางแจ้งและมีความหลงใหลในการผจญภัย",
+    categories: ["Marketing", "Technology"],
+    salary: "28,000 - 40,000 บาท",
+    description: "สร้างแคมเปญการตลาดออนไลน์เพื่อส่งเสริมการท่องเที่ยว",
     requirements: [
-      "Experience leading outdoor activities",
-      "First aid and CPR certification",
-      "Physical fitness and outdoor skills",
-      "Knowledge of local geography and wildlife"
+      "ปริญญาตรี สาขาการตลาด หรือสื่อสารมวลชน",
+      "มีประสบการณ์ Digital Marketing",
+      "เข้าใจ Social Media และ SEO"
     ],
-    datePosted: "2025-04-25",
-    isHot: true,
-    categories: ["Tourism", "Outdoor Recreation"]
+    isHot: false,
+    workType: "Hybrid",
+    experience: "2-4 ปี",
+    education: "ปริญญาตรี",
+    skills: ["Social Media", "SEO", "Content Creation", "Analytics"],
+    benefits: ["ทำงานจากบ้านได้", "โบนัสผลงาน", "ค่าอินเทอร์เน็ต"]
   }
-];
-
-export const categories = [
-  "Tourism",
-  "Hospitality",
-  "Food & Beverage",
-  "Customer Service",
-  "Education",
-  "Culture",
-  "Marketing",
-  "Outdoor Recreation"
-];
-
-export const employmentTypes = [
-  "Full-time",
-  "Part-time",
-  "Contract",
-  "Internship"
 ];

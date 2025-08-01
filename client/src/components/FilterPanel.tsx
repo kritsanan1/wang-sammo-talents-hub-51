@@ -1,12 +1,9 @@
-
 import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetFooter } from '@/components/ui/sheet';
-import { Filter, X } from 'lucide-react';
-import { categories, employmentTypes } from '@/data/jobs';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 
 interface FilterPanelProps {
   selectedCategories: string[];
@@ -21,96 +18,120 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   onCategoryChange,
   onTypeChange,
 }) => {
-  const isMobile = useIsMobile();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [categoryOpen, setCategoryOpen] = useState(true);
+  const [typeOpen, setTypeOpen] = useState(true);
 
-  const FilterContent = () => (
-    <>
-      <div className="mb-6">
-        <h3 className="font-prompt text-lg font-medium mb-3">หมวดหมู่งาน</h3>
-        <div className="space-y-2">
-          {categories.map((category) => (
-            <div key={category} className="flex items-center space-x-2">
-              <Checkbox 
-                id={`category-${category}`}
-                checked={selectedCategories.includes(category)}
-                onCheckedChange={(checked) => 
-                  onCategoryChange(category, checked === true)
-                }
-              />
-              <Label 
-                htmlFor={`category-${category}`}
-                className="text-sm cursor-pointer"
-              >
-                {category}
-              </Label>
-            </div>
-          ))}
-        </div>
-      </div>
+  const categories = [
+    'Tourism',
+    'Hospitality', 
+    'Food',
+    'Technology',
+    'Marketing',
+    'Culture',
+    'Education',
+    'Service'
+  ];
 
-      <div className="mb-6">
-        <h3 className="font-prompt text-lg font-medium mb-3">ประเภทงาน</h3>
-        <div className="space-y-2">
-          {employmentTypes.map((type) => (
-            <div key={type} className="flex items-center space-x-2">
-              <Checkbox 
-                id={`type-${type}`}
-                checked={selectedTypes.includes(type)}
-                onCheckedChange={(checked) => 
-                  onTypeChange(type, checked === true)
-                }
-              />
-              <Label 
-                htmlFor={`type-${type}`}
-                className="text-sm cursor-pointer"
-              >
-                {type}
-              </Label>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
-  );
+  const employmentTypes = [
+    'Full-time',
+    'Part-time',
+    'Contract',
+    'Freelance'
+  ];
 
-  // Mobile filter drawer
-  if (isMobile) {
-    return (
-      <div className="mb-4">
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button 
-              variant="outline" 
-              className="w-full flex items-center justify-center gap-2"
-            >
-              <Filter size={16} />
-              ตัวกรอง {selectedCategories.length + selectedTypes.length > 0 && `(${selectedCategories.length + selectedTypes.length})`}
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="bottom" className="h-[80vh] rounded-t-xl">
-            <SheetTitle className="font-prompt text-xl">ตัวกรองการค้นหา</SheetTitle>
-            <div className="py-4 overflow-y-auto max-h-[calc(80vh-8rem)]">
-              <FilterContent />
-            </div>
-            <SheetFooter className="mt-4">
-              <Button 
-                className="w-full bg-wang-orange hover:bg-orange-600" 
-                onClick={() => setIsOpen(false)}
-              >
-                ยืนยันตัวกรอง
-              </Button>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
-      </div>
-    );
-  }
+  const categoryLabels: Record<string, string> = {
+    'Tourism': 'ท่องเที่ยว',
+    'Hospitality': 'การโรงแรม',
+    'Food': 'อาหารและเครื่องดื่ม',
+    'Technology': 'เทคโนโลยี',
+    'Marketing': 'การตลาด',
+    'Culture': 'วัฒนธรรม',
+    'Education': 'การศึกษา',
+    'Service': 'การบริการ'
+  };
 
-  // Desktop filter panel
+  const typeLabels: Record<string, string> = {
+    'Full-time': 'เต็มเวลา',
+    'Part-time': 'พาร์ทไทม์',
+    'Contract': 'สัญญาจ้าง',
+    'Freelance': 'อิสระ'
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-5 sticky top-24">
-      <FilterContent />
+    <div className="space-y-4">
+      {/* Categories Filter */}
+      <Card>
+        <Collapsible open={categoryOpen} onOpenChange={setCategoryOpen}>
+          <CollapsibleTrigger asChild>
+            <CardHeader className="cursor-pointer hover:bg-gray-50 pb-3">
+              <CardTitle className="text-base font-prompt flex items-center justify-between">
+                หมวดหมู่งาน
+                <ChevronDown className={`h-4 w-4 transition-transform ${categoryOpen ? 'rotate-180' : ''}`} />
+              </CardTitle>
+            </CardHeader>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <CardContent className="pt-0">
+              <div className="space-y-3">
+                {categories.map((category) => (
+                  <div key={category} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`category-${category}`}
+                      checked={selectedCategories.includes(category)}
+                      onCheckedChange={(checked) => 
+                        onCategoryChange(category, checked as boolean)
+                      }
+                    />
+                    <label
+                      htmlFor={`category-${category}`}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                    >
+                      {categoryLabels[category] || category}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </CollapsibleContent>
+        </Collapsible>
+      </Card>
+
+      {/* Employment Type Filter */}
+      <Card>
+        <Collapsible open={typeOpen} onOpenChange={setTypeOpen}>
+          <CollapsibleTrigger asChild>
+            <CardHeader className="cursor-pointer hover:bg-gray-50 pb-3">
+              <CardTitle className="text-base font-prompt flex items-center justify-between">
+                ประเภทการจ้างงาน
+                <ChevronDown className={`h-4 w-4 transition-transform ${typeOpen ? 'rotate-180' : ''}`} />
+              </CardTitle>
+            </CardHeader>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <CardContent className="pt-0">
+              <div className="space-y-3">
+                {employmentTypes.map((type) => (
+                  <div key={type} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`type-${type}`}
+                      checked={selectedTypes.includes(type)}
+                      onCheckedChange={(checked) => 
+                        onTypeChange(type, checked as boolean)
+                      }
+                    />
+                    <label
+                      htmlFor={`type-${type}`}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                    >
+                      {typeLabels[type] || type}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </CollapsibleContent>
+        </Collapsible>
+      </Card>
     </div>
   );
 };

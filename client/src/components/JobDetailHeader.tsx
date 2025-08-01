@@ -1,101 +1,113 @@
 import React from 'react';
-import { ArrowLeft, Calendar, Share2 } from 'lucide-react';
+import { Link } from 'wouter';
+import { ArrowLeft, MapPin, Building, Clock, Bookmark, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useNavigate } from 'react-router-dom';
+import { Job } from '@/data/jobs';
 
 interface JobDetailHeaderProps {
-  job: {
-    id: string;
-    title: string;
-    titleThai?: string;
-    company: string;
-    location: string;
-    categories: string[];
-    employmentType: string;
-    datePosted: string;
-    companyLogo?: string;
-  };
+  job: Job;
 }
 
 const JobDetailHeader: React.FC<JobDetailHeaderProps> = ({ job }) => {
-  const navigate = useNavigate();
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: job.titleThai || job.title,
-        text: `ตำแหน่งงาน ${job.titleThai || job.title} ที่ ${job.company}`,
-        url: window.location.href,
-      });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-    }
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('th-TH', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
   return (
-    <div className="mb-6">
-      <div className="flex items-center justify-between mb-4">
-        <Button
-          variant="ghost"
-          onClick={() => navigate(-1)}
-          className="pl-0 text-muted-foreground hover:text-primary"
-          size="sm"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          ย้อนกลับ
-        </Button>
-        
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleShare}
-          className="hidden sm:flex"
-        >
-          <Share2 className="mr-2 h-4 w-4" />
-          แชร์
-        </Button>
+    <div className="space-y-6">
+      {/* Back Button */}
+      <div>
+        <Link to="/jobs">
+          <Button
+            variant="ghost"
+            className="mb-4 pl-0 text-muted-foreground hover:text-primary"
+            size="sm"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            กลับไปยังรายการงาน
+          </Button>
+        </Link>
       </div>
-      
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
-        <div className="mb-4 sm:mb-0 sm:mr-4 flex-1">
-          <h1 className="font-prompt text-2xl md:text-3xl font-bold text-foreground mb-2">
-            {job.titleThai || job.title}
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-2">
-            {job.company}
-          </p>
-          <p className="text-muted-foreground mb-4">
-            {job.location}
-          </p>
-          
-          <div className="flex flex-wrap gap-2 mb-4">
-            {job.categories.map((category) => (
-              <Badge key={category} variant="outline" className="bg-blue-50 text-primary border-blue-200">
-                {category}
+
+      {/* Job Header */}
+      <div className="space-y-4">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+          <div className="flex-1">
+            <div className="flex items-start gap-4 mb-4">
+              {job.companyLogo && (
+                <img 
+                  src={job.companyLogo} 
+                  alt={job.company}
+                  className="w-16 h-16 object-contain rounded-lg border flex-shrink-0"
+                />
+              )}
+              <div className="flex-1">
+                <h1 className="font-prompt text-2xl md:text-3xl font-bold text-foreground mb-2">
+                  {job.titleThai || job.title}
+                </h1>
+                <div className="flex items-center text-muted-foreground mb-2">
+                  <Building className="h-5 w-5 mr-2" />
+                  <span className="text-lg font-medium">{job.company}</span>
+                </div>
+                <div className="flex items-center text-muted-foreground">
+                  <MapPin className="h-4 w-4 mr-2" />
+                  <span>{job.location}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Job Details */}
+            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
+              <div className="flex items-center">
+                <Clock className="h-4 w-4 mr-2" />
+                ประกาศเมื่อ {formatDate(job.datePosted)}
+              </div>
+              {job.salary && (
+                <div className="text-wang-blue font-semibold text-lg">
+                  {job.salary}
+                </div>
+              )}
+            </div>
+
+            {/* Categories and Type */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              <Badge variant="secondary" className="bg-wang-blue text-white">
+                {job.employmentType}
               </Badge>
-            ))}
-            <Badge variant="secondary">
-              {job.employmentType}
-            </Badge>
+              {job.workType && (
+                <Badge variant="outline">
+                  {job.workType}
+                </Badge>
+              )}
+              {job.categories.map((category, index) => (
+                <Badge key={index} variant="outline">
+                  {category}
+                </Badge>
+              ))}
+            </div>
           </div>
-          
-          <div className="flex items-center text-muted-foreground text-sm">
-            <Calendar className="h-4 w-4 mr-2" />
-            <span>เผยแพร่เมื่อ {new Date(job.datePosted).toLocaleDateString('th-TH')}</span>
+
+          {/* Action Buttons */}
+          <div className="flex gap-2 md:flex-col">
+            <Button size="lg" className="bg-wang-orange hover:bg-orange-600 flex-1 md:flex-none">
+              สมัครงาน
+            </Button>
+            <Button variant="outline" size="lg">
+              <Bookmark className="h-4 w-4 mr-2" />
+              บันทึก
+            </Button>
+            <Button variant="outline" size="lg">
+              <Share2 className="h-4 w-4 mr-2" />
+              แชร์
+            </Button>
           </div>
         </div>
-        
-        {job.companyLogo && (
-          <div className="flex-shrink-0">
-            <img 
-              src={job.companyLogo} 
-              alt={job.company} 
-              className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-lg border" 
-              loading="lazy"
-            />
-          </div>
-        )}
       </div>
     </div>
   );

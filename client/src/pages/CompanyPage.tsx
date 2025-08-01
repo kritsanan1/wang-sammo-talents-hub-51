@@ -1,5 +1,6 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'wouter';
+import { Link } from 'wouter';
 import { ArrowLeft, MapPin, Users, Calendar, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,7 +14,7 @@ const CompanyPage = () => {
   const { companySlug } = useParams<{ companySlug: string }>();
   
   // Convert slug back to company name (simple implementation)
-  const companyName = companySlug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || '';
+  const companyName = companySlug?.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()) || '';
   
   // Find all jobs from this company
   const companyJobs = jobs.filter(job => 

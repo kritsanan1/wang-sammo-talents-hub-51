@@ -1,145 +1,173 @@
 import React from 'react';
-import { Bookmark, MapPin, DollarSign, Clock, Building } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Link } from 'wouter';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Building, MapPin, Users, Calendar, Globe, Phone, Mail } from 'lucide-react';
 import { toast } from 'sonner';
-import { Link } from 'react-router-dom';
+import { Job } from '@/data/jobs';
 
 interface JobDetailSidebarProps {
-  job: {
-    id: string;
-    title: string;
-    titleThai?: string;
-    company: string;
-    salary: string;
-    employmentType: string;
-    location: string;
-    workType?: string;
-    experience?: string;
-    education?: string;
-  };
+  job: Job;
 }
 
 const JobDetailSidebar: React.FC<JobDetailSidebarProps> = ({ job }) => {
-  const handleSaveJob = () => {
-    toast.success("บันทึกงานสำเร็จ", {
-      description: `เพิ่ม ${job.titleThai || job.title} เข้าสู่รายการบันทึกแล้ว`,
-    });
+  const handleApply = () => {
+    toast.success('ใบสมัครของคุณได้รับการส่งเรียบร้อยแล้ว!');
   };
 
-  const handleApplyJob = () => {
-    toast.success("สมัครงานสำเร็จ", {
-      description: `ส่งใบสมัคร ${job.titleThai || job.title} เรียบร้อยแล้ว`,
-    });
+  const handleSave = () => {
+    toast.success('บันทึกงานเรียบร้อยแล้ว!');
   };
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: job.titleThai || job.title,
+        text: `ตำแหน่งงาน: ${job.titleThai || job.title} ที่ ${job.company}`,
+        url: window.location.href,
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      toast.success('คัดลอกลิงก์เรียบร้อยแล้ว!');
+    }
+  };
+
+  // Convert company name to slug for company page
+  const companySlug = job.company.toLowerCase().replace(/\s+/g, '-');
 
   return (
     <div className="space-y-6">
-      {/* Application Card */}
+      {/* Quick Apply */}
       <Card>
         <CardContent className="p-6">
-          <h3 className="font-prompt text-lg font-semibold mb-4">สรุปงาน</h3>
-          
           <div className="space-y-4">
-            <div className="flex items-center">
-              <DollarSign className="h-4 w-4 mr-3 text-primary" />
-              <div>
-                <p className="text-sm text-muted-foreground">เงินเดือน</p>
-                <p className="text-primary font-semibold">{job.salary}</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center">
-              <Clock className="h-4 w-4 mr-3 text-primary" />
-              <div>
-                <p className="text-sm text-muted-foreground">ประเภทงาน</p>
-                <p className="font-medium">{job.employmentType}</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center">
-              <MapPin className="h-4 w-4 mr-3 text-primary" />
-              <div>
-                <p className="text-sm text-muted-foreground">สถานที่ทำงาน</p>
-                <p className="font-medium">{job.location}</p>
-              </div>
-            </div>
-
-            {job.workType && (
-              <div className="flex items-center">
-                <Building className="h-4 w-4 mr-3 text-primary" />
-                <div>
-                  <p className="text-sm text-muted-foreground">รูปแบบงาน</p>
-                  <p className="font-medium">{job.workType}</p>
-                </div>
-              </div>
-            )}
-
-            {job.experience && (
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">ประสบการณ์</p>
-                <Badge variant="outline">{job.experience}</Badge>
-              </div>
-            )}
-
-            {job.education && (
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">การศึกษา</p>
-                <Badge variant="outline">{job.education}</Badge>
-              </div>
-            )}
-          </div>
-          
-          <div className="mt-6 space-y-3">
             <Button 
-              onClick={handleApplyJob} 
-              className="w-full bg-primary hover:bg-primary/90"
+              size="lg" 
+              className="w-full bg-wang-orange hover:bg-orange-600"
+              onClick={handleApply}
             >
-              สมัครงาน
+              สมัครงานตำแหน่งนี้
             </Button>
-            <Button 
-              variant="outline" 
-              onClick={handleSaveJob} 
-              className="w-full"
-            >
-              <Bookmark className="mr-2 h-4 w-4" />
-              บันทึกงานนี้
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Company Info Card */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="font-prompt text-base">เกี่ยวกับบริษัท</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            <p className="font-medium">{job.company}</p>
-            <p className="text-sm text-muted-foreground">
-              ดูข้อมูลเพิ่มเติมเกี่ยวกับบริษัทและตำแหน่งงานอื่นๆ
-            </p>
-            <Link to={`/company/${job.company.toLowerCase().replace(/\s+/g, '-')}`}>
-              <Button variant="outline" size="sm" className="w-full">
-                ดูโปรไฟล์บริษัท
+            <div className="grid grid-cols-2 gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full"
+                onClick={handleSave}
+              >
+                บันทึกงาน
               </Button>
-            </Link>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="w-full"
+                onClick={handleShare}
+              >
+                แชร์งาน
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Share Card */}
+      {/* Company Info */}
       <Card>
         <CardHeader>
-          <CardTitle className="font-prompt text-base">แชร์ตำแหน่งงานนี้</CardTitle>
+          <CardTitle className="font-prompt text-lg">เกี่ยวกับบริษัท</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center space-x-3">
+            {job.companyLogo && (
+              <img 
+                src={job.companyLogo} 
+                alt={job.company}
+                className="w-12 h-12 object-contain rounded-lg border"
+              />
+            )}
+            <div>
+              <h3 className="font-prompt font-semibold">{job.company}</h3>
+              <p className="text-sm text-muted-foreground">บริษัท</p>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-center text-sm">
+              <MapPin className="h-4 w-4 mr-3 text-muted-foreground" />
+              <span>{job.location}</span>
+            </div>
+            <div className="flex items-center text-sm">
+              <Building className="h-4 w-4 mr-3 text-muted-foreground" />
+              <span>บริษัทในหมวด {job.categories[0]}</span>
+            </div>
+            <div className="flex items-center text-sm">
+              <Users className="h-4 w-4 mr-3 text-muted-foreground" />
+              <span>50-200 พนักงาน</span>
+            </div>
+          </div>
+
+          <Link to={`/company/${companySlug}`}>
+            <Button variant="outline" size="sm" className="w-full">
+              ดูข้อมูลบริษัท
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
+
+      {/* Job Categories */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-prompt text-lg">หมวดหมู่งาน</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline" size="sm">Facebook</Button>
-            <Button variant="outline" size="sm">LINE</Button>
-            <Button variant="outline" size="sm">อีเมล</Button>
+            {job.categories.map((category, index) => (
+              <Link key={index} to={`/jobs?category=${category}`}>
+                <Badge 
+                  variant="outline" 
+                  className="cursor-pointer hover:bg-wang-blue hover:text-white transition-colors"
+                >
+                  {category}
+                </Badge>
+              </Link>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Contact Info */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-prompt text-lg">ข้อมูลติดต่อ</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <div className="flex items-center text-sm">
+            <Mail className="h-4 w-4 mr-3 text-muted-foreground" />
+            <span>hr@{job.company.toLowerCase().replace(/\s+/g, '')}.com</span>
+          </div>
+          <div className="flex items-center text-sm">
+            <Phone className="h-4 w-4 mr-3 text-muted-foreground" />
+            <span>02-XXX-XXXX</span>
+          </div>
+          <div className="flex items-center text-sm">
+            <Globe className="h-4 w-4 mr-3 text-muted-foreground" />
+            <span>www.{job.company.toLowerCase().replace(/\s+/g, '')}.com</span>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Application Deadline */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-prompt text-lg">กำหนดเวลา</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center text-sm">
+            <Calendar className="h-4 w-4 mr-3 text-muted-foreground" />
+            <div>
+              <p className="font-medium">เปิดรับสมัครถึง</p>
+              <p className="text-muted-foreground">31 มกราคม 2567</p>
+            </div>
           </div>
         </CardContent>
       </Card>

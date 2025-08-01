@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchBar from '@/components/SearchBar';
@@ -9,28 +9,29 @@ import FilterPanel from '@/components/FilterPanel';
 import { jobs } from '@/data/jobs';
 
 const JobsPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
+  const [location, setLocation] = useLocation();
+  const urlParams = new URLSearchParams(location.split('?')[1] || '');
+  const [searchTerm, setSearchTerm] = useState(urlParams.get('q') || '');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
   // Initialize filters from URL params - optimized with useEffect dependencies
   useEffect(() => {
-    const category = searchParams.get('category');
+    const category = urlParams.get('category');
     if (category) {
       setSelectedCategories([category]);
     }
     
-    const type = searchParams.get('type');
+    const type = urlParams.get('type');
     if (type) {
       setSelectedTypes([type]);
     }
     
-    const query = searchParams.get('q');
+    const query = urlParams.get('q');
     if (query) {
       setSearchTerm(query);
     }
-  }, [searchParams]);
+  }, [location]);
 
   // Memoize filtered jobs for better performance
   const filteredJobs = useMemo(() => {
@@ -69,8 +70,9 @@ const JobsPage = () => {
     if (searchTerm) params.set('q', searchTerm);
     if (selectedCategories.length === 1) params.set('category', selectedCategories[0]);
     if (selectedTypes.length === 1) params.set('type', selectedTypes[0]);
-    setSearchParams(params);
-  }, [searchTerm, selectedCategories, selectedTypes, setSearchParams]);
+    const newPath = params.toString() ? `/jobs?${params.toString()}` : '/jobs';
+    setLocation(newPath);
+  }, [searchTerm, selectedCategories, selectedTypes, setLocation]);
 
   // Memoized event handlers
   const handleSearch = useCallback((term: string) => {

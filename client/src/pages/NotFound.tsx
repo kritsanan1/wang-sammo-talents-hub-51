@@ -1,20 +1,20 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'wouter';
 import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const NotFound = () => {
-  const location = useLocation();
+  const [location] = useLocation();
 
   useEffect(() => {
     console.error(
       "404 Error: User attempted to access non-existent route:",
-      location.pathname
+      location
     );
-  }, [location.pathname]);
+  }, [location]);
 
   return (
     <div className="min-h-screen flex flex-col">

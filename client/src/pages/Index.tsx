@@ -1,6 +1,6 @@
 
 import React, { useState, useCallback, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'wouter';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SearchBar from '@/components/SearchBar';
@@ -10,7 +10,7 @@ import { jobs } from '@/data/jobs';
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   
   // Memoized job lists to prevent unnecessary recalculations
   const hotJobs = useMemo(() => jobs.filter(job => job.isHot), []);
@@ -28,8 +28,8 @@ const Index = () => {
 
   // Handle search with navigation
   const handleSearch = useCallback((term: string) => {
-    navigate(`/jobs?q=${encodeURIComponent(term)}`);
-  }, [navigate]);
+    setLocation(`/jobs?q=${encodeURIComponent(term)}`);
+  }, [setLocation]);
 
   return (
     <div className="min-h-screen flex flex-col">
